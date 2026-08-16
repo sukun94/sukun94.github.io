@@ -1,0 +1,232 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <!-- Градиенты (можно оставить фиксированными, они уже есть) -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#39d353;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#21262d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+
+    <!-- GLOBAL TONE FILTER (оставляем, будет модифицироваться через randomize_svg_tone) -->
+    <filter id="tone" x="0%" y="0%" width="100%" height="100%">
+      <feColorMatrix type="saturate" values="1.0"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 1 0"/>
+    </filter>
+
+    <!-- Clip-path (координаты могут меняться, но оставим фиксированными для безопасности) -->
+    <clipPath id="titleClip">
+      <rect x="220" y="200" width="710" height="100"/>
+    </clipPath>
+    <clipPath id="installerClip">
+      <rect x="220" y="295" width="710" height="100"/>
+    </clipPath>
+    <clipPath id="subtitleClip">
+      <rect x="220" y="380" width="710" height="55"/>
+    </clipPath>
+  </defs>
+
+  <g filter="url(#tone)">
+
+    <!-- Фон (без изменений) -->
+    <rect width="1280" height="640" fill="url(#bgGrad)"/>
+
+    <!-- Сетка с случайной прозрачностью -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#21262d" stroke-width="0.5"/>
+    </pattern>
+    <rect width="1280" height="640" fill="url(#grid)" opacity="[RNDM0.2-0.6]"/>
+
+    <!-- Акцентные блики – меняем размер и прозрачность -->
+    <ellipse cx="[RNDM150-250]" cy="[RNDM280-360]" rx="[RNDM200-350]" ry="[RNDM150-250]" fill="#39d353" opacity="[RNDM0.02-0.08]"/>
+    <ellipse cx="[RNDM1000-1150]" cy="[RNDM280-360]" rx="[RNDM200-350]" ry="[RNDM150-250]" fill="#0ea5e9" opacity="[RNDM0.02-0.08]"/>
+
+    <!-- Верхняя и нижняя полосы – случайная высота -->
+    <rect x="0" y="0" width="1280" height="[RNDM3-6]" fill="url(#accentGrad)"/>
+    <rect x="0" y="[RNDM634-637]" width="1280" height="[RNDM3-6]" fill="url(#accentGrad)"/>
+
+    <!-- Левая вертикальная полоса – случайная толщина и прозрачность -->
+    <rect x="[RNDM70-90]" y="[RNDM70-90]" width="[RNDM2-5]" height="[RNDM460-500]" fill="url(#accentGrad)" opacity="[RNDM0.4-0.8]"/>
+
+    <!-- ===== ЛЕВЫЙ БЛОК: иконка пакета и шестерёнка с сильной вариацией ===== -->
+    <!-- Общий контейнер со случайным смещением и масштабом -->
+    <g transform="translate([RNDM60-140], [RNDM160-240]) scale([RNDM0.7-1.3])" filter="url(#shadow)">
+      <!-- Пакет (размеры и координаты внутри тоже могут меняться) -->
+      <g transform="translate([RNDM-10-10], [RNDM-5-5])">
+        <rect x="0" y="[RNDM12-20]" width="[RNDM70-90]" height="[RNDM58-70]" fill="#21262d" stroke="#30363d" stroke-width="[RNDM1.5-3]" rx="[RNDM3-7]"/>
+        <polygon points="0,[RNDM12-20] [RNDM35-45],0 [RNDM70-90],[RNDM12-20] [RNDM35-45],[RNDM28-36]" fill="#2d333b" stroke="#30363d" stroke-width="[RNDM1.5-3]"/>
+        <rect x="[RNDM30-38]" y="0" width="[RNDM8-16]" height="[RNDM28-36]" fill="#39d353" opacity="[RNDM0.7-1.0]"/>
+        <line x1="[RNDM35-45]" y1="[RNDM28-36]" x2="[RNDM35-45]" y2="[RNDM74-86]" stroke="#30363d" stroke-width="[RNDM1.5-3]"/>
+        <!-- Стрелка внутри -->
+        <g transform="translate([RNDM35-45], [RNDM50-62])">
+          <line x1="0" y1="[RNDM-14--8]" x2="0" y2="[RNDM8-14]" stroke="url(#accentGrad)" stroke-width="[RNDM3-5]" stroke-linecap="round"/>
+          <polyline points="[RNDM-11--7],[RNDM1-5] 0,[RNDM8-14] [RNDM7-11],[RNDM1-5]" fill="none" stroke="url(#accentGrad)" stroke-width="[RNDM3-5]" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- Шестерёнка – случайное положение, размер и поворот -->
+    <g transform="translate([RNDM100-180], [RNDM340-420]) rotate([RNDM0-360]) scale([RNDM0.6-1.4])" filter="url(#shadow)">
+      <g fill="#30363d" stroke="#484f58" stroke-width="[RNDM1-2.5]">
+        <rect x="-4" y="-[RNDM30-38]" width="8" height="[RNDM12-16]" rx="1"/>
+        <rect x="-4" y="-[RNDM30-38]" width="8" height="[RNDM12-16]" rx="1" transform="rotate(45)"/>
+        <rect x="-4" y="-[RNDM30-38]" width="8" height="[RNDM12-16]" rx="1" transform="rotate(90)"/>
+        <rect x="-4" y="-[RNDM30-38]" width="8" height="[RNDM12-16]" rx="1" transform="rotate(135)"/>
+        <rect x="-4" y="-[RNDM30-38]" width="8" height="[RNDM12-16]" rx="1" transform="rotate(180)"/>
+        <rect x="-4" y="-[RNDM30-38]" width="8" height="[RNDM12-16]" rx="1" transform="rotate(225)"/>
+        <rect x="-4" y="-[RNDM30-38]" width="8" height="[RNDM12-16]" rx="1" transform="rotate(270)"/>
+        <rect x="-4" y="-[RNDM30-38]" width="8" height="[RNDM12-16]" rx="1" transform="rotate(315)"/>
+      </g>
+      <circle cx="0" cy="0" r="[RNDM20-28]" fill="#21262d" stroke="#484f58" stroke-width="[RNDM1.5-2.5]"/>
+      <circle cx="0" cy="0" r="[RNDM7-11]" fill="#0d1117" stroke="#484f58" stroke-width="[RNDM1.5-2.5]"/>
+    </g>
+
+    <!-- ===== ЗАГОЛОВКИ (с вариацией размера шрифта и интервала) ===== -->
+    <g clip-path="url(#titleClip)">
+      <text id="projectName"
+            x="220" y="[RNDM268-288]"
+            font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+            font-size="[RNDM56-72]"
+            font-weight="[RNDM600-800]"
+            letter-spacing="[RNDM-3-1]"
+            fill="#ffffff"
+            filter="url(#glow)"
+            textLength="710"
+            lengthAdjust="spacingAndGlyphs">[NAME]</text>
+    </g>
+
+    <g clip-path="url(#installerClip)">
+      <text x="220" y="[RNDM348-368]"
+            font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+            font-size="[RNDM56-72]"
+            font-weight="[RNDM600-800]"
+            letter-spacing="[RNDM-3-1]"
+            fill="url(#accentGrad)"
+            filter="url(#glow)">Installer</text>
+    </g>
+
+    <!-- Подзаголовок – случайный размер и сдвиг -->
+    <g clip-path="url(#subtitleClip)">
+      <text x="[RNDM218-226]" y="[RNDM398-412]"
+            font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+            font-size="[RNDM18-26]"
+            font-weight="[RNDM300-500]"
+            fill="#8b949e"
+            letter-spacing="[RNDM0-1.5]">One-click installer</text>
+    </g>
+
+    <!-- Разделитель – случайная толщина и длина -->
+    <line x1="[RNDM210-230]" y1="[RNDM440-450]" x2="[RNDM880-920]" y2="[RNDM440-450]" stroke="#30363d" stroke-width="[RNDM1-3]"/>
+
+    <!-- ===== БЕЙДЖИ (с небольшими изменениями) ===== -->
+    <!-- Badge 1: Windows + macOS -->
+    <g transform="translate([RNDM212-232], [RNDM460-470])">
+      <rect x="0" y="0" width="[RNDM190-210]" height="[RNDM32-40]" fill="#21262d" rx="[RNDM14-22]" stroke="#30363d" stroke-width="[RNDM0.5-1.5]"/>
+      <g transform="translate([RNDM12-20], [RNDM9-14])">
+        <rect x="0" y="0" width="[RNDM5-7]" height="[RNDM5-7]" fill="#0078d4"/>
+        <rect x="[RNDM6-8]" y="0" width="[RNDM5-7]" height="[RNDM5-7]" fill="#0078d4"/>
+        <rect x="0" y="[RNDM6-8]" width="[RNDM5-7]" height="[RNDM5-7]" fill="#0078d4"/>
+        <rect x="[RNDM6-8]" y="[RNDM6-8]" width="[RNDM5-7]" height="[RNDM5-7]" fill="#0078d4"/>
+      </g>
+      <text x="[RNDM32-40]" y="[RNDM20-26]" font-family="'Segoe UI', Arial, sans-serif" font-size="[RNDM12-16]" fill="#e6edf3" font-weight="[RNDM400-600]">Windows</text>
+      <text x="[RNDM98-110]" y="[RNDM20-26]" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="[RNDM12-16]" fill="#484f58" font-weight="400">+</text>
+      <g transform="translate([RNDM108-118], [RNDM7-12])" fill="#e6edf3">
+        <path d="M11.6 11.2c0-2 1.6-2.9 1.7-3-0.9-1.3-2.3-1.5-2.8-1.5-1.2-0.1-2.3 0.7-2.9 0.7-0.6 0-1.5-0.7-2.5-0.7-1.3 0-2.5 0.7-3.2 1.9-1.4 2.4-0.3 5.9 1 7.9 0.7 1 1.5 2 2.5 2 1 0 1.4-0.6 2.6-0.6 1.2 0 1.5 0.6 2.6 0.6 1.1 0 1.7-1 2.4-2 0.8-1.1 1.1-2.2 1.1-2.3-0.1 0-2.1-0.8-2.1-3z"/>
+        <path d="M9.5 5c0.5-0.6 0.9-1.5 0.8-2.4-0.8 0-1.7 0.5-2.2 1.2-0.5 0.5-0.9 1.5-0.8 2.3 0.9 0.1 1.7-0.5 2.2-1.1z"/>
+      </g>
+      <text x="[RNDM130-138]" y="[RNDM20-26]" font-family="'Segoe UI', Arial, sans-serif" font-size="[RNDM12-16]" fill="#e6edf3" font-weight="[RNDM400-600]">macOS</text>
+    </g>
+
+    <!-- Badge 2: MIT License -->
+    <g transform="translate([RNDM424-444], [RNDM460-470])">
+      <rect x="0" y="0" width="[RNDM110-130]" height="[RNDM32-40]" fill="#21262d" rx="[RNDM14-22]" stroke="#30363d" stroke-width="[RNDM0.5-1.5]"/>
+      <text x="[RNDM12-20]" y="[RNDM20-26]" font-family="'Segoe UI', Arial, sans-serif" font-size="[RNDM12-16]" fill="#39d353" font-weight="[RNDM500-700]">MIT</text>
+      <text x="[RNDM42-50]" y="[RNDM20-26]" font-family="'Segoe UI', Arial, sans-serif" font-size="[RNDM12-16]" fill="#e6edf3" font-weight="400">License</text>
+    </g>
+
+    <!-- Badge 3: Auto-Update CI -->
+    <g transform="translate([RNDM556-576], [RNDM460-470])">
+      <rect x="0" y="0" width="[RNDM150-170]" height="[RNDM32-40]" fill="#21262d" rx="[RNDM14-22]" stroke="#30363d" stroke-width="[RNDM0.5-1.5]"/>
+      <text x="[RNDM12-20]" y="[RNDM20-26]" font-family="'Segoe UI', Arial, sans-serif" font-size="[RNDM12-16]" fill="#0ea5e9" font-weight="[RNDM400-600]">Auto-Update CI</text>
+    </g>
+
+    <!-- Badge 4: Open Source -->
+    <g transform="translate([RNDM728-748], [RNDM460-470])">
+      <rect x="0" y="0" width="[RNDM130-150]" height="[RNDM32-40]" fill="#21262d" rx="[RNDM14-22]" stroke="#30363d" stroke-width="[RNDM0.5-1.5]"/>
+      <text x="[RNDM12-20]" y="[RNDM20-26]" font-family="'Segoe UI', Arial, sans-serif" font-size="[RNDM12-16]" fill="#f78166" font-weight="[RNDM400-600]">Open Source</text>
+    </g>
+
+    <!-- ===== ТЕРМИНАЛЬНАЯ КАРТОЧКА (правая панель) ===== -->
+    <!-- Случайное смещение, размер и радиус -->
+    <g transform="translate([RNDM940-960], [RNDM110-130])" filter="url(#shadow)">
+      <rect x="0" y="0" width="[RNDM250-270]" height="[RNDM380-420]" fill="url(#cardGrad)" rx="[RNDM8-16]" stroke="#30363d" stroke-width="[RNDM0.5-1.5]"/>
+      <!-- Верхняя панель терминала -->
+      <rect x="0" y="0" width="[RNDM250-270]" height="[RNDM32-40]" fill="#21262d" rx="[RNDM8-16]"/>
+      <rect x="0" y="[RNDM20-28]" width="[RNDM250-270]" height="[RNDM8-16]" fill="#21262d"/>
+      <!-- Кнопки (размер и позиция) -->
+      <circle cx="[RNDM16-24]" cy="[RNDM16-22]" r="[RNDM5-7]" fill="#ff5f56"/>
+      <circle cx="[RNDM36-44]" cy="[RNDM16-22]" r="[RNDM5-7]" fill="#ffbd2e"/>
+      <circle cx="[RNDM56-64]" cy="[RNDM16-22]" r="[RNDM5-7]" fill="#27c93f"/>
+      <!-- Заголовок терминала -->
+      <text x="[RNDM120-140]" y="[RNDM20-26]" text-anchor="middle" font-family="'Courier New', monospace" font-size="[RNDM11-14]" fill="#8b949e">install.sh</text>
+
+      <!-- Текст терминала (размер шрифта и координаты варьируются) -->
+      <g font-family="'Courier New', monospace" fill="#8b949e">
+        <text x="[RNDM12-20]" y="[RNDM62-74]" font-size="[RNDM12-15]" fill="#39d353">$ ./install.sh</text>
+        <text x="[RNDM12-20]" y="[RNDM86-98]" font-size="[RNDM11-14]">[INFO] Detecting OS...</text>
+        <text x="[RNDM12-20]" y="[RNDM106-118]" font-size="[RNDM11-14]" fill="#39d353">[OK]   Windows / macOS</text>
+        <text x="[RNDM12-20]" y="[RNDM126-138]" font-size="[RNDM11-14]">[INFO] Resolving target...</text>
+        <text x="[RNDM12-20]" y="[RNDM146-158]" font-size="[RNDM11-14]" fill="#39d353">[OK]   Target located</text>
+        <text x="[RNDM12-20]" y="[RNDM166-178]" font-size="[RNDM11-14]">[INFO] Downloading...</text>
+      </g>
+
+      <!-- Прогресс-бар (случайная ширина и высота) -->
+      <rect x="[RNDM12-20]" y="[RNDM180-192]" width="[RNDM220-240]" height="[RNDM6-10]" fill="#30363d" rx="[RNDM2-5]"/>
+      <rect x="[RNDM12-20]" y="[RNDM180-192]" width="[RNDM120-228]" height="[RNDM6-10]" fill="url(#accentGrad)" rx="[RNDM2-5]"/>
+
+      <!-- Дальнейший текст терминала -->
+      <g font-family="'Courier New', monospace" fill="#8b949e">
+        <text x="[RNDM12-20]" y="[RNDM204-216]" font-size="[RNDM11-14]">[INFO] Installing files...</text>
+        <text x="[RNDM12-20]" y="[RNDM224-236]" font-size="[RNDM11-14]" fill="#39d353">[OK]   Files copied</text>
+        <text x="[RNDM12-20]" y="[RNDM244-256]" font-size="[RNDM11-14]" fill="#39d353">[OK]   Config applied</text>
+        <text x="[RNDM12-20]" y="[RNDM264-276]" font-size="[RNDM11-14]">----------------------------</text>
+        <text x="[RNDM12-20]" y="[RNDM290-302]" font-size="[RNDM13-16]" fill="#ffffff" font-weight="bold">Installation complete!</text>
+        <text x="[RNDM12-20]" y="[RNDM312-324]" font-size="[RNDM11-14]">Ready to launch.</text>
+      </g>
+
+      <!-- Мигающий курсор (размер и позиция) -->
+      <rect x="[RNDM12-20]" y="[RNDM334-346]" width="[RNDM8-12]" height="[RNDM14-18]" fill="#39d353" opacity="[RNDM0.7-1.0]">
+        <animate attributeName="opacity" values="0.9;0;0.9" dur="1.2s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+
+    <!-- ===== НИЖНЯЯ ПОДПИСЬ (с вариацией размера и позиции) ===== -->
+    <text x="[RNDM620-660]" y="[RNDM600-620]"
+          text-anchor="middle"
+          font-family="'Segoe UI', Arial, sans-serif"
+          font-size="[RNDM14-18]"
+          fill="#30363d"
+          letter-spacing="[RNDM0-2]">github.com / [REPO_NAME]</text>
+
+  </g>
+</svg>
